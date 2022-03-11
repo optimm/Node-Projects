@@ -45,4 +45,3 @@ const database = async () => {
 };
 
 database();
-
