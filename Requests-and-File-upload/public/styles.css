@@ -343,6 +343,17 @@ nav {
   margin: auto;
   margin-top: 2rem;
 }
+.res {
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  width: 600px;
+  padding-top: 8px;
+  color: #0a0919;
+  /* background-color: red; */
+  margin: auto;
+  margin-top: 20px;
+}
 h5 + h5 {
   margin-left: 1rem;
 }

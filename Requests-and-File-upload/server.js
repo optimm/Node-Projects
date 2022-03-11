@@ -13,12 +13,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //? Post requests with fetch and axios
-app.post("/api", function (req, res) {
+// using multer.array to parse the form data
+app.post("/api", multer().array(), function (req, res) {
   const { name } = req.body; // with multer formdata can be acessed and
   // req.body.name for json type
   //   const name = req.body.name;
   console.log(name);
-  res.status(201).json({ name: name + name, sucess: true });
+  res.status(201).json({ name: name, sucess: true });
 });
 
 //-----------------------------------------------------------------------------------------
@@ -52,6 +53,12 @@ app.post("/uploadd", function (req, res) {
     }
   });
 });
-app.listen(5000, "192.168.1.45", () => {
+
+//ipv4 address of wifi added so u can connect same wifi in phone and then run website on ipv4:5000 and acess from phone too
+// app.listen(5000, "192.168.1.45", () => {
+//   console.log("server running by ayush on port 5000..");
+// });
+
+app.listen(5000, () => {
   console.log("server running by ayush on port 5000..");
 });
