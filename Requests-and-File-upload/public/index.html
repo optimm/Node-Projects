@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Request Practice By Ayush</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-center">
+        <h5>HTTP Methods</h5>
+        <div>
+          <a href="upload.html">File Upload </a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section>
+        <form id="fr">
+          <h3>Javascript Form</h3>
+          <div class="form-row">
+            <label for="name"> enter name </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-input"
+              autocomplete="false"
+            />
+            <small class="form-alert"></small>
+          </div>
+          <button type="submit" class="block submit-btn">submit</button>
+        </form>
+        <div class="result"></div>
+      </section>
+    </main>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let formm = document.getElementById("fr");
+      formm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        // pass as form data -- use with multer
+        let formData = new FormData(formm);
+        const options = {
+          method: "POST",
+          body: formData,
+        };
+        const data = await fetch("/api", options);
+        const json = await data.json();
+        console.log(json);
+
+        // pass as form json -- use with json parse
+        const plainFormData = Object.fromEntries(formData.entries());
+        const values = JSON.stringify(plainFormData);
+
+        // const options = {
+        //   method: "POST",
+        //   body: values,
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        // };
+        // const data = await fetch("/api", options);
+        // const json = await data.json();
+        // console.log(json);
+        //  with axios
+        //  const data = await axios.post("/api", obj);
+        //  const data = await axios.post("/api", formData);
+        // console.log(data.data);
+      });
+    </script>
+  </body>
+</html>

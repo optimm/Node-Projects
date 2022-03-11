@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>File Upload Ayush</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-center">
+        <h5>HTTP Methods</h5>
+        <div>
+          <a href="index.html">regular </a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section>
+        <form id="fr">
+          <h3>Javascript Form</h3>
+          <div class="form-row">
+            <label for="name"> enter name </label>
+            <input type="file" name="files" id="files" class="form-input" />
+            <small class="form-alert"></small>
+          </div>
+          <button type="submit" class="block submit-btn">submit</button>
+        </form>
+        <div class="result">
+          <embed src="" width="500px" height="240px" type="" id="embedd" />
+        </div>
+      </section>
+    </main>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let formm = document.getElementById("fr");
+      formm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        const fileField = document.querySelector('input[type="file"]');
+        const image = document.getElementById("embedd");
+        if (fileField.files.length == 0) {
+          return;
+        }
+        formData.append("title", "ayush saxena's files");
+        formData.append("file", fileField.files[0]);
+        const options = {
+          method: "POST",
+          body: formData,
+        };
+        const data = await fetch("/uploadd", options);
+        const json = await data.json();
+        let path = json.path;
+        path = path.substring(path.indexOf("/"));
+        path = "." + path;
+        console.log(path);
+        let type = json.mimetype;
+        image.src = path;
+        image.type = type;
+        // image.style.backgroundImage = `url(.${path})`;
+      });
+    </script>
+  </body>
+</html>
